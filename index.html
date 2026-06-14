@@ -143,87 +143,94 @@ nav{
 
 /* Eyebrow */
 .eyebrow{
-  font-family:'JetBrains Mono',monospace;font-size:11px;
-  color:var(--cyan);letter-spacing:0.28em;
-  margin-bottom:24px;display:flex;align-items:center;gap:14px;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:12px;font-weight:500;
+  color:rgba(255,255,255,0.5);
+  letter-spacing:0.32em;
+  margin-bottom:28px;
+  display:flex;align-items:center;gap:16px;
   opacity:0;animation:up .7s .2s forwards;
+  text-transform:uppercase;
 }
-.eyebrow::before{content:'';width:32px;height:1px;background:linear-gradient(to right,transparent,var(--cyan))}
-.eyebrow::after{content:'';width:32px;height:1px;background:linear-gradient(to left,transparent,var(--cyan))}
+.eyebrow::before{
+  content:'';width:36px;height:1px;
+  background:linear-gradient(to right,transparent,rgba(0,212,255,0.6));
+  flex-shrink:0;
+}
+.eyebrow::after{
+  content:'';width:36px;height:1px;
+  background:linear-gradient(to left,transparent,rgba(0,212,255,0.6));
+  flex-shrink:0;
+}
 
 /* Big name */
 .hero-name{
   font-family:'Noto Serif SC',serif;
-  font-size:clamp(64px,9vw,128px);
-  font-weight:900;line-height:.92;
+  font-size:clamp(56px,8.5vw,122px);
+  font-weight:900;line-height:.9;
   letter-spacing:0.02em;
-  margin-bottom:28px;
+  margin-bottom:32px;
   opacity:0;animation:up .8s .35s forwards;
-  cursor:pointer;
+  cursor:default;
+  white-space:nowrap;
 }
 
-/* 第一行：镂空描边 + 实心混排 */
+/* 两行都不换行，inline 排列 */
 .hero-name .line1{
   display:block;
-  margin-bottom:6px;
+  margin-bottom:8px;
 }
-/* 第二行：纯实心 */
 .hero-name .line2{
   display:block;
 }
 
-/* 镂空描边文字 */
+/* 镂空描边 → 常态直接填色亮起 */
 .hero-name .stroke-text{
-  color:transparent;
-  -webkit-text-stroke:2px rgba(255,255,255,0.45);
-  transition:color .5s ease, -webkit-text-stroke .5s ease, text-shadow .5s ease;
+  color:var(--white);
+  -webkit-text-stroke:2px transparent;
+  text-shadow:0 0 28px rgba(0,212,255,0.45), 0 0 56px rgba(0,212,255,0.15);
 }
-/* 实心白色文字 */
+
+/* 实心白 */
 .hero-name .solid-text{
   color:var(--white);
-  transition:text-shadow .5s ease;
+  text-shadow:0 0 24px rgba(255,255,255,0.4), 0 0 48px rgba(0,212,255,0.15);
 }
-/* 渐变实心文字（第二行用） */
+
+/* 第二行：动态灰银渐变，常态流动 */
 .hero-name .grad-text{
-  background: linear-gradient(
+  background:linear-gradient(
     90deg,
-    #8A8A9A 0%,
-    #C8C8D8 25%,
-    #E8E8F0 50%,
-    #C8C8D8 75%,
-    #8A8A9A 100%
+    #7A7A8A 0%,
+    #B8B8CC 20%,
+    #E0E0EE 45%,
+    #B8B8CC 70%,
+    #7A7A8A 100%
   );
-  background-size: 200% auto;
+  background-size:220% auto;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   background-clip:text;
-  animation: gradShift 4s linear infinite;
-  transition:filter .5s ease;
+  animation:gradShift 5s linear infinite;
 }
 @keyframes gradShift{
-  0%  { background-position: 0% center; }
-  100%{ background-position: 200% center; }
-}
-.hero-name:hover .grad-text{
-  filter:drop-shadow(0 0 20px rgba(200,200,220,0.5));
-  animation-duration: 1.5s;
-}
-.hero-name:hover .stroke-text{
-  color:var(--white);
-  -webkit-text-stroke:2px transparent;
-  text-shadow:0 0 30px rgba(0,212,255,0.5), 0 0 60px rgba(0,212,255,0.2);
-}
-.hero-name:hover .solid-text{
-  text-shadow:0 0 30px rgba(255,255,255,0.5), 0 0 60px rgba(0,212,255,0.2);
+  0%  {background-position:0% center}
+  100%{background-position:220% center}
 }
 
+/* hero 副标题文字 */
 .hero-desc{
-  font-size:15px;color:var(--sec);line-height:1.9;
-  max-width:400px;margin-bottom:32px;
-  letter-spacing:0.04em;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:14px;
+  color:rgba(255,255,255,0.42);
+  line-height:1.95;
+  max-width:400px;
+  margin-bottom:32px;
+  letter-spacing:0.06em;
   opacity:0;animation:up .8s .5s forwards;
-  border-left:2px solid rgba(0,212,255,.3);
-  padding-left:16px;
+  padding-left:18px;
+  border-left:1px solid rgba(0,212,255,0.25);
+  font-weight:400;
 }
 
 .hero-chips{
@@ -231,13 +238,20 @@ nav{
   opacity:0;animation:up .8s .65s forwards;
 }
 .chip{
-  font-family:'JetBrains Mono',monospace;font-size:10px;
-  color:var(--muted);letter-spacing:0.12em;
-  padding:5px 14px;border:1px solid rgba(255,255,255,0.08);
-  background:rgba(255,255,255,0.02);
-  transition:border-color .25s,color .25s;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:11px;font-weight:500;
+  color:rgba(255,255,255,0.38);
+  letter-spacing:0.08em;
+  padding:6px 16px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.03);
+  transition:border-color .25s,color .25s,background .25s;
 }
-.chip:hover{border-color:rgba(0,212,255,.3);color:var(--cyan)}
+.chip:hover{
+  border-color:rgba(0,212,255,0.3);
+  color:rgba(0,212,255,0.8);
+  background:rgba(0,212,255,0.04);
+}
 
 .hero-btns{display:flex;gap:14px;opacity:0;animation:up .8s .8s forwards}
 .btn-fill{
@@ -333,6 +347,141 @@ section{position:relative;z-index:1;padding:80px 64px}
 .sec-title span[style*="muted"]{
   font-weight:300;
   font-family:'Noto Serif SC',serif;
+}
+
+/* ─── WORKS HEADER ─── */
+.works-header{
+  position:relative;
+  margin-bottom:52px;
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:40px;
+}
+
+/* Left: title block */
+.works-title-block{}
+
+.works-eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--cyan);letter-spacing:0.28em;
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:16px;opacity:.7;
+}
+.works-eyebrow::before{content:'';width:20px;height:1px;background:var(--cyan)}
+
+.works-big-title{
+  font-family:'Noto Serif SC',serif;
+  font-size:clamp(44px,5.5vw,80px);
+  font-weight:900;line-height:.88;
+  letter-spacing:0.01em;
+  display:flex;align-items:baseline;gap:16px;
+  flex-wrap:nowrap;
+}
+
+/* "项目" — white solid */
+.wt-main{
+  color:var(--white);
+  text-shadow:0 0 40px rgba(0,212,255,0.2);
+}
+
+/* "/" divider */
+.wt-slash{
+  color:rgba(0,212,255,0.35);
+  font-weight:300;font-size:.65em;
+  font-family:'Space Grotesk',sans-serif;
+}
+
+/* "作品集" — stroke outline, animated */
+.wt-sub{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.75em;
+  font-weight:300;
+  letter-spacing:0.28em;
+  color:rgba(255,255,255,0.35);
+  position:relative;
+  -webkit-text-fill-color:rgba(255,255,255,0.35);
+  text-transform:uppercase;
+}
+
+/* Right: mini vinyl record decoration */
+.works-vinyl{
+  position:relative;width:96px;height:96px;flex-shrink:0;
+  margin-bottom:8px;
+}
+.vinyl-disc{
+  width:96px;height:96px;border-radius:50%;
+  background:conic-gradient(
+    from 0deg,
+    #1C2340 0deg, #0D1428 40deg,
+    #1C2340 80deg, #0D1428 120deg,
+    #1C2340 160deg, #0D1428 200deg,
+    #1C2340 240deg, #0D1428 280deg,
+    #1C2340 320deg, #0D1428 360deg
+  );
+  border:2px solid rgba(0,212,255,0.35);
+  box-shadow:
+    0 0 0 4px rgba(0,212,255,0.08),
+    0 0 24px rgba(0,212,255,0.25),
+    0 0 48px rgba(0,212,255,0.1),
+    inset 0 0 16px rgba(0,0,0,0.6);
+  animation:vinylSpin 6s linear infinite;
+  position:relative;
+}
+@keyframes vinylSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* Groove rings */
+.vinyl-disc::before{
+  content:'';position:absolute;inset:10px;border-radius:50%;
+  border:1px solid rgba(0,212,255,0.12);
+  box-shadow:
+    0 0 0 7px rgba(0,212,255,0.07),
+    0 0 0 14px rgba(0,212,255,0.05),
+    0 0 0 21px rgba(0,212,255,0.03);
+}
+
+/* Center label */
+.vinyl-disc::after{
+  content:'VR';
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:28px;height:28px;border-radius:50%;
+  background:radial-gradient(circle,var(--cyan) 0%,var(--cyan-dim) 100%);
+  font-family:'JetBrains Mono',monospace;font-size:7px;
+  color:#000;font-weight:700;letter-spacing:.08em;
+  box-shadow:0 0 16px var(--cyan),0 0 32px rgba(0,212,255,0.4);
+  line-height:28px;text-align:center;
+}
+
+/* Needle arm */
+.vinyl-needle{
+  position:absolute;top:0;right:-12px;
+  width:44px;height:3px;
+  background:linear-gradient(to right,rgba(180,200,255,0.9),rgba(120,160,255,0.3));
+  transform-origin:right center;
+  transform:rotate(-32deg);
+  border-radius:2px;
+  box-shadow:0 0 6px rgba(0,212,255,0.3);
+}
+.vinyl-needle::after{
+  content:'';position:absolute;
+  left:0;top:50%;transform:translateY(-50%);
+  width:8px;height:8px;border-radius:50%;
+  background:var(--cyan);
+  box-shadow:0 0 10px var(--cyan),0 0 20px rgba(0,212,255,0.5);
+}
+
+/* Right: count label */
+.works-count{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:11px;font-weight:500;
+  color:rgba(255,255,255,0.25);
+  letter-spacing:0.12em;
+  margin-top:12px;
+  text-align:right;
+}
+.works-count span{
+  font-size:28px;font-weight:700;
+  background:var(--grad);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-right:6px;
 }
 
 /* ─── WORKS: 3D RING GALLERY ─── */
@@ -992,8 +1141,23 @@ footer{
 
 <!-- WORKS -->
 <section id="works">
-  <div class="sec-eyebrow">SELECTED WORKS</div>
-  <h2 class="sec-title reveal">项目<br><span style="color:var(--muted);font-weight:300">作品集</span></h2>
+  <div class="works-header reveal">
+    <div class="works-title-block">
+      <div class="works-eyebrow">SELECTED WORKS</div>
+      <div class="works-big-title">
+        <span class="wt-main">项目</span>
+        <span class="wt-slash">/</span>
+        <span class="wt-sub">作品集</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0">
+      <div class="works-vinyl">
+        <div class="vinyl-disc"></div>
+        <div class="vinyl-needle"></div>
+      </div>
+      <div class="works-count"><span id="worksCount">5</span>PROJECTS</div>
+    </div>
+  </div>
 
   <!-- 3D Ring Gallery -->
   <div class="gallery-wrap reveal">
@@ -1406,6 +1570,10 @@ async function loadWorks(){
   } catch(e){ works = DEFAULT_WORKS; }
 
   if(loading) loading.remove();
+
+  // Update vinyl count
+  const countEl = document.getElementById('worksCount');
+  if(countEl) countEl.textContent = works.length;
 
   let cur = 0, autoTimer = null;
   const N = works.length;
